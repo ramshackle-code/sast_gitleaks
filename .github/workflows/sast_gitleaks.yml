@@ -17,7 +17,12 @@ on:
         type: string
         description: Execution Runners
         required: false
-        default: 'ubuntu-latest'      
+        default: 'ubuntu-latest'
+      gitleaks-config:
+        type: string
+        description: GitLeaks configuration file
+        required: false
+        default: 'cfg/gitleaks.toml' 
     secrets:
       token:
         required: true
@@ -53,5 +58,5 @@ jobs:
         run: |
           # Scan repository
           cd ${{ env.GIT_LEAKS_DIR }}
-          ./gitleaks detect --redact -v -s ${{ github.WORKSPACE }} -r ${{ github.WORKSPACE }}/report_gitleaks.txt
+          ./gitleaks detect --redact -v -c ${{ github.WORKSPACE }}/${{ inputs.gitleaks_config }} -s ${{ github.WORKSPACE }} -r ${{ github.WORKSPACE }}/report_gitleaks.txt
      
