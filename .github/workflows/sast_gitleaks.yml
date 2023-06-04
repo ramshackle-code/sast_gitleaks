@@ -1,0 +1,4 @@
+name: Static Application Security Testing - GitLeaks
+
+on:
+  workflow_dispatch:
