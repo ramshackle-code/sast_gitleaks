@@ -1,4 +1,57 @@
-name: Static Application Security Testing - GitLeaks
+name: SAST_Gitleaks
 
 on:
-  workflow_dispatch:
+  workflow_call:
+    inputs:
+      timeout-minutes:
+        type: number
+        description: Timeout to break the job.
+        required: false
+        default: 5
+      gitleaks-version:
+        type: string
+        description: GitLeaks version 
+        required: false
+        default: '8.16.1'
+      runs-on:
+        type: string
+        description: Execution Runners
+        required: false
+        default: 'ubuntu-latest'      
+    secrets:
+      token:
+        required: true
+
+jobs:
+  sast_gitleaks:
+    name: Scan Gitleaks
+    runs-on: ${{ inputs.runs-on }}
+    timeout-minutes: ${{ inputs.timeout-minutes }}
+    permissions:                                                                         # Need write content to create issues
+      contents: read
+    env:
+      GIT_LEAKS_DIR: ${{ github.WORKSPACE }}/gitleaks
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@24cb9080177205b6e8c946b17badbe402adc938f               # @v3.3.0
+        with:
+          token: ${{ secrets.token }}
+          fetch-depth: '0'                                                            # All commits
+
+      - name: Install GitLeaks
+        run: |
+          mkdir -p ${{ env.GIT_LEAKS_DIR }}
+          cd ${{ env.GIT_LEAKS_DIR }}
+          wget https://github.com/zricethezav/gitleaks/releases/download/v${{ inputs.gitleaks-version }}/gitleaks_${{ inputs.gitleaks-version }}_linux_x64.tar.gz >/dev/null 2>&1
+          tar -xvzf gitleaks_${{ inputs.gitleaks-version }}_linux_x64.tar.gz >/dev/null 2>&1
+          chmod +x gitleaks          
+
+      - name: Scan repository
+        id: scan
+        shell: bash
+        run: |
+          # Scan repository
+          cd ${{ env.GIT_LEAKS_DIR }}
+          ./gitleaks detect --redact -v -s ${{ github.WORKSPACE }} -r ${{ github.WORKSPACE }}/report_gitleaks.txt
+     
