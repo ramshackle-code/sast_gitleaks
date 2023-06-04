@@ -26,4 +26,5 @@ Optinal parameters
        timeout-minutes: <minutes>     #Execution timeout. Default value 5 minutes
        gitleaks-version: <image tag>  #GitLeaks version. Default 8.16.1
        runs-on: <runner label>        #Runner Label. Default 'ubuntu-latest'
+       gitleaks-config: <config file> #Gitleaks config file. Default 'cfg/gitleaks.toml'
 ```
