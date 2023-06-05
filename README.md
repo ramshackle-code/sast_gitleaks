@@ -29,3 +29,12 @@ Optinal parameters
        gitleaks-config: <config file> #Gitleaks config file. Default 'cfg/gitleaks.toml'
        fetch-depth: <depth>           #Fetch Depth. Deafult 1 actual commit 0 all commits
 ```
+
+Exceptions
+
+In order to avoid false positive you can put a file called `.gitleaksignore.yml` in your repo root folder with the hash, file and line to exclude.
+Example:
+
+```
+19afb0df830fdeddea7efa323cefddfcc9d27927:docs/tec/tec_blogawsparte1.md:private-key:108
+```
