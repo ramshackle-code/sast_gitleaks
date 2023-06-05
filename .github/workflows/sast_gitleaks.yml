@@ -61,7 +61,7 @@ jobs:
         id: scan
         shell: bash
         env:
-          GITLEAKS_CONFIG: ${{ github.WORKSPACE }}/${{ inputs.gitleaks_config }}
+          GITLEAKS_CONFIG: ${{ github.WORKSPACE }}/${{ inputs.gitleaks-config }}
         run: |
           # Scan repository
           cd ${{ env.GIT_LEAKS_DIR }}
