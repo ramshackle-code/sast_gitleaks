@@ -27,4 +27,5 @@ Optinal parameters
        gitleaks-version: <image tag>  #GitLeaks version. Default 8.16.1
        runs-on: <runner label>        #Runner Label. Default 'ubuntu-latest'
        gitleaks-config: <config file> #Gitleaks config file. Default 'cfg/gitleaks.toml'
+       fetch-depth: <depth>           #Fetch Depth. Deafult 1 actual commit 0 all commits
 ```

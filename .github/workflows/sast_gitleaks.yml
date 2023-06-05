@@ -23,6 +23,11 @@ on:
         description: GitLeaks configuration file
         required: false
         default: 'cfg/gitleaks.toml' 
+      fetch-depth:
+        type: number
+        description: Checkout fecth-depth
+        required: false
+        default: 1 # All history 
     secrets:
       token:
         required: true
@@ -42,7 +47,7 @@ jobs:
         uses: actions/checkout@24cb9080177205b6e8c946b17badbe402adc938f               # @v3.3.0
         with:
           token: ${{ secrets.token }}
-          fetch-depth: '0'                                                            # All commits
+          fetch-depth: ${{ inputs.fetch-depth }}                                     # 1 Actual Commit 0 All commits
 
       - name: Install GitLeaks
         run: |
@@ -55,8 +60,10 @@ jobs:
       - name: Scan repository
         id: scan
         shell: bash
+        env:
+          GITLEAKS_CONFIG: ${{ github.WORKSPACE }}/${{ inputs.gitleaks_config }}
         run: |
           # Scan repository
           cd ${{ env.GIT_LEAKS_DIR }}
-          ./gitleaks detect --redact -v -c ${{ github.WORKSPACE }}/${{ inputs.gitleaks_config }} -s ${{ github.WORKSPACE }} -r ${{ github.WORKSPACE }}/report_gitleaks.txt
+          ./gitleaks detect --redact -v -s ${{ github.WORKSPACE }} -r ${{ github.WORKSPACE }}/report_gitleaks.txt
      
