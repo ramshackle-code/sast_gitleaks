@@ -12,7 +12,7 @@ on:
         type: string
         description: GitLeaks version 
         required: false
-        default: '8.16.1'
+        default: '8.18.2'
       runs-on:
         type: string
         description: Execution Runners
