@@ -1,7 +1,7 @@
 # sast_gitleaks
 Static Application Security Testing using GitLeaks
 
-Reusable Workflow v.1.0.0
+Reusable Workflow v.1.3.0
 
 Call example:
 
@@ -24,7 +24,7 @@ Optinal parameters
      uses: ramshackle-code/sast_semgrep/.github/workflows/sast_gitleaks.yml@[<version-tag> or <commit-sha>]
      with:
        timeout-minutes: <minutes>     #Execution timeout. Default value 5 minutes
-       gitleaks-version: <image tag>  #GitLeaks version. Default 8.16.1
+       gitleaks-version: <image tag>  #GitLeaks version. Default 8.18.2
        runs-on: <runner label>        #Runner Label. Default 'ubuntu-latest'
        gitleaks-config: <config file> #Gitleaks config file. Default 'cfg/gitleaks.toml'
        fetch-depth: <depth>           #Fetch Depth. Deafult 1 actual commit 0 all commits
