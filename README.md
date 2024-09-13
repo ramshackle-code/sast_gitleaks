@@ -16,7 +16,7 @@ jobs:
   sast_gitleaks:
     permissions:                                                                         
       contents: read
-    uses: ramshackle-code/sast_gitleaks/.github/workflows/sast_gitleaks.yml@922631f04aeeee05b0d16295608f13a7616a5844  #v1.3.1
+    uses: ramshackle-code/sast_gitleaks/.github/workflows/sast_gitleaks.yml@0de5a68b4c898df6928e8913759357d5e95a86a6  #v1.3.1
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
 ```
